@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ExamifyServerApplication {
 
 	public static void main(String[] args) {
-//		SpringApplication.run(ExamifyServerApplication.class, args);
+		SpringApplication.run(ExamifyServerApplication.class, args);
 		System.out.println("hello exam portal see here ");
 	}
 
