@@ -1,4 +1,4 @@
-package repository;
+package examifyserver.com.repository;
 
 import examifyserver.com.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
