@@ -8,4 +8,8 @@ import java.util.Set;
 public interface UserService {
     //creating user
     public User createUser(User user , Set<UserRole>userRoles) throws Exception;
+
+    //get Specific User
+
+    public User fatchUserByUserName(String userName);
 }

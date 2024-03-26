@@ -1,5 +1,5 @@
 /*
- * Author Name:
+ * Author Name:Sanjay Singh Rawat
  * Date: 3/24/2024
  * Created With: IntelliJ IDEA Community Edition
  */
@@ -12,10 +12,7 @@ import examifyserver.com.model.User;
 import examifyserver.com.model.UserRole;
 import examifyserver.com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,8 +38,13 @@ public class UserController {
 
         roles.add(userRole);
 
-        return this.userService.createUser(user,roles);
+        return this.userService.createUser(user, roles);
     }
 
+
+    @GetMapping(value = "/{userName}")
+    public User getUser(@PathVariable("userName") String userName) {
+        return this.userService.fatchUserByUserName(userName);
+    }
 
 }

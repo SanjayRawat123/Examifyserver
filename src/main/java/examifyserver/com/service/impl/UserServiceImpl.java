@@ -47,4 +47,10 @@ public class UserServiceImpl implements UserService {
         }
         return local;
     }
+
+    @Override
+    public User fatchUserByUserName(String userName) {
+        return this.userRepository.findByUserName(userName);
+    }
+
 }
