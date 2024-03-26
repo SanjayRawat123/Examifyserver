@@ -67,12 +67,12 @@ public class User {
         return this;
     }
 
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
 
-    public User setUsername(String username) {
-        this.userName = username;
+    public User setUserName(String userName) {
+        this.userName = userName;
         return this;
     }
 
