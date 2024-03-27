@@ -10,6 +10,8 @@ public interface UserService {
     public User createUser(User user , Set<UserRole>userRoles) throws Exception;
 
     //get Specific User
-
     public User fatchUserByUserName(String userName);
+
+    //delete user by id
+    public void deleteUser(long id);
 }

@@ -47,4 +47,10 @@ public class UserController {
         return this.userService.fatchUserByUserName(userName);
     }
 
+
+    @DeleteMapping(value = "/{id}")
+    public void deletfun1(@PathVariable("id") long id){
+        this.userService.deleteUser(id);
+
+    }
 }

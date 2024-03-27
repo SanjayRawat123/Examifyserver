@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
 
-
     @Override
     public User createUser(User user, Set<UserRole> userRoles) throws Exception {
 
@@ -53,4 +52,8 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findByUserName(userName);
     }
 
+    @Override
+    public void deleteUser(long id) {
+        this.userRepository.deleteById(id);
+    }
 }
