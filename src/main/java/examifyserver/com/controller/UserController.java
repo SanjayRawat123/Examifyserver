@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //creating user
+
     @PostMapping(value = "/")
     public User createUser(@RequestBody User user) throws Exception {
         Set<UserRole> roles = new HashSet<>();
