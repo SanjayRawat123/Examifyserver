@@ -14,7 +14,9 @@ import examifyserver.com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -52,5 +54,13 @@ public class UserController {
     public void deletfun1(@PathVariable("id") long id){
         this.userService.deleteUser(id);
 
+    }
+
+    @GetMapping(value = "/")
+    public Object hello() {
+        Map<String, String> object = new HashMap<>();
+        object.put("name", "Integration Ninjas");
+        object.put("email", "integrationninjas@gmail.com");
+        return object;
     }
 }
