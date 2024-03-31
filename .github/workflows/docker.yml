@@ -31,10 +31,10 @@ jobs:
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
 
       - name: Build Docker image
-        run: docker build -t integrationninjas/springboot-example .
+        run: docker build -t rawatdocker145/examify:latest .
 
       - name: Publish image to Docker Hub
-        run: docker push integrationninjas/springboot-example:latest
+        run: docker push rawatdocker145/examify:latest
 
   deploy:
     needs: build
@@ -42,10 +42,10 @@ jobs:
 
     steps:
       - name: Pull Image from Docker Hub
-        run: docker pull integrationninjas/springboot-example:latest
+        run: docker pull rawatdocker145/examify:latest
 
       - name: Delete old container if exists
-        run: docker rm -f springboot-example-container || true
+        run: docker rm -f examify-container || true
 
       - name: Run Docker container
-        run: docker run -d -p 8080:8080 --name springboot-example-container integrationninjas/springboot-example
+        run: docker run -d -p 8080:8080 --name examify-container rawatdocker145/examify:latest
