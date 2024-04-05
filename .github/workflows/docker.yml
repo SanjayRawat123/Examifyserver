@@ -40,8 +40,14 @@ jobs:
       - name: Start docker
         run:  sudo systemctl start docker
 
-      - name: create network
-        run:  docker network create sanjay-network
+      - name: Check if network exists
+        id: check_network
+        run: |
+            docker network inspect sanjay-network > /dev/null 2>&1 || echo "::set-output name=network_exists::false"
+
+            - name: Create network if it doesn't exist
+              if: steps.check_network.outputs.network_exists == 'false'
+              run: docker network create sanjay-network
 
       - name: Pull Image from Docker Hub For Mysql and run container
         run: docker container run --name mysqlcontainer --network sanjay-network -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=examifydb -d mysql:8
