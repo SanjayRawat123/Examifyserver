@@ -27,25 +27,29 @@ jobs:
       - name: Build with Maven
         run: mvn clean install -DskipTests
 
-      - name: Login to Docker Hub
-        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-
       - name: Build Docker image
-        run: docker build -t rawatdocker145/examify:latest .
+        run: docker image build -t examify-server .
 
-      - name: Publish image to Docker Hub
-        run: docker push rawatdocker145/examify:latest
+
 
   deploy:
     needs: build
     runs-on: [self-hosted]
 
     steps:
-      - name: Pull Image from Docker Hub
-        run: docker pull rawatdocker145/examify:latest
+      - name: Start docker
+        run:  sudo systemctl start docker
+
+      - name: create network
+        run:  docker network create sanjay-network
+
+      - name: Pull Image from Docker Hub For Mysql and run container
+        run: docker container run --name mysqlcontainer --network sanjay-network -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=examifydb -d mysql:8
+
 
       - name: Delete old container if exists
-        run: docker rm -f examify-container || true
+        run: docker rm -f examify-server-container || true
 
       - name: Run Docker container
-        run: docker run -d -p 8080:8080 --name examify-container rawatdocker145/examify:latest
+        run: docker container run --network sanjay-network --name examify-server-container -p 8080:8080 -d examify-server
+
