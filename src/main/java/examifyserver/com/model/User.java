@@ -9,12 +9,16 @@ package examifyserver.com.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User {
+public class User implements UserDetails {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -76,8 +80,38 @@ public class User {
         return this;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority>set = new HashSet<>();
+        this.userRoles.forEach(userRole->{
+            set.add(new Authority(userRole.getRole().getRoleName()));
+        });
+
+        return List.of();
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return "";
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
     public User setPassword(String password) {

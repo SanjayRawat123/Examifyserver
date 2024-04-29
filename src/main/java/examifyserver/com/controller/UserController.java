@@ -21,6 +21,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/user")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -29,6 +30,7 @@ public class UserController {
 
     @PostMapping(value = "/")
     public User createUser(@RequestBody User user) throws Exception {
+        System.out.println("user is coming here");
         Set<UserRole> roles = new HashSet<>();
         Role role = new Role();
         role.setRoleId(44L);
@@ -56,11 +58,4 @@ public class UserController {
 
     }
 
-    @GetMapping(value = "/")
-    public Object hello() {
-        Map<String, String> object = new HashMap<>();
-        object.put("name", "Integration Ninjas");
-        object.put("email", "integrationninjas@gmail.com");
-        return object;
-    }
-}
+   }

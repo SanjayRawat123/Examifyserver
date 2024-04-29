@@ -29,14 +29,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user, Set<UserRole> userRoles) throws Exception {
-
         User local = this.userRepository.findByUserName(user.getUserName());
         if (local != null) {
             System.out.println("User is already there !!");
             throw new Exception("User already present !!");
         } else {
             //user create
-
             for (UserRole userRole : userRoles) {
                 roleRepository.save(userRole.getRole());
             }
@@ -44,7 +42,7 @@ public class UserServiceImpl implements UserService {
             local = this.userRepository.save(user);
 
         }
-        return local;
+        return  local;
     }
 
     @Override
